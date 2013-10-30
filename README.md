@@ -16,5 +16,3 @@
 >
 > Just don't want to keep track of anymore online bookmark collection services neither of my account information of those.
 >
-> Just Drag-n-Drop the Button below on your Bookmark Toolbar.
->
