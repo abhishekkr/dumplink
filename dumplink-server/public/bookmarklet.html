@@ -60,11 +60,11 @@
   <h1>DumpLink</h1>
   It's a Bookmarklet aware service to have a offline collection of any link you intend to collect ( to later read or anything ;) ).<br/><br/>
   Just don't want to keep track of anymore online bookmark collection services neither of my account information of those.
-  <img src="dumplinks.png" width="250px"/>
+  <img src="/static/dumplinks.png" width="250px"/>
   <h3>Just Drag-n-Drop the Button below on your Bookmark Toolbar.</h3>
   <a id="abk_bookmarklet_dumplink" class="button bookmarklet"
      onclick="window.alert('Drag this link to your bookmarks toolbar...');return false;"
-     href="javascript: ( function() { var url='http://127.0.0.1:8000?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); var oReq = new XMLHttpRequest(); oReq.open('GET', url, true); oReq.send();} )();" >
+     href="javascript: ( function() { var url='http://127.0.0.1:8000/dump?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); var oReq = new XMLHttpRequest(); oReq.open('GET', url, true); oReq.send();} )();" >
     DumpLink
   </a>
 </div>
