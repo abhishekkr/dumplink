@@ -64,9 +64,10 @@
   <h3>Just Drag-n-Drop the Button below on your Bookmark Toolbar.</h3>
   <a id="abk_bookmarklet_dumplink" class="button bookmarklet"
      onclick="window.alert('Drag this link to your bookmarks toolbar...');return false;"
-     href="javascript: ( function() { var url='http://127.0.0.1:8000/dump?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); var oReq = new XMLHttpRequest(); oReq.open('GET', url, true); oReq.send();} )();" >
+     href="javascript: ( function() { var url='http://{{.HTTPURI}}:{{.HTTPPort}}/dump?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); var oReq = new XMLHttpRequest(); oReq.open('GET', url, true); oReq.send();} )();" >
     DumpLink
   </a>
+  <div>Dumped links are available <a href="/links">Here.</a></div>
 </div>
 </body>
 </html>
