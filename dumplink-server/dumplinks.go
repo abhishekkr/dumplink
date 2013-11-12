@@ -76,7 +76,7 @@ func Dump(w http.ResponseWriter, req *http.Request) {
   fmt.Println(req.FormValue("title"))
   save_json(req.FormValue("url"), req.FormValue("title"))
 
-  t, _ := template.ParseFiles("public/status.html")
+  t, _ := template.ParseFiles("public/dump200.html")
   t.Execute(w, nil)
 }
 
