@@ -31,15 +31,6 @@ func not_in_list(new_link string, list []Link) bool{
   return true
 }
 
-func read_json() string{
-  contents, err := ioutil.ReadFile(*linkfile)
-  if err != nil {
-    fmt.Println("Error:", err)
-    return "Error: JSON gave error while reading."
-  }
-  return string(contents)
-}
-
 func save_json(new_url string, title string) bool{
   contents,_ := ioutil.ReadFile(*linkfile)
   var dump Links
@@ -83,8 +74,25 @@ func Dump(w http.ResponseWriter, req *http.Request) {
 func GetLinks(w http.ResponseWriter, req *http.Request) {
   w.Header().Set("Content-Type", "text/html")
 
-  t, _ := template.ParseFiles("public/status.html")
-  t.Execute(w, map[string]string {"BODY": read_json()})
+  contents, err := ioutil.ReadFile(*linkfile)
+  if err != nil {
+    fmt.Println("Error:", err)
+    contents = []byte("Error: JSON gave error while reading.")
+  }
+
+  t, err := template.ParseFiles("public/status.html")
+  if err != nil {
+    fmt.Println("Error: Link template failed.")
+  }
+  var content_html string
+  var content_json Links
+  json.Unmarshal(contents, &content_json)
+  for _, linkmap  := range content_json.Urls {
+    for link, linkname := range linkmap {
+        content_html += fmt.Sprintf("<a href='%s'>%s</a><br/>", link, linkname)
+    }
+  }
+  t.Execute(w, map[string]string {"LINK_JSON": content_html})
 }
 
 
