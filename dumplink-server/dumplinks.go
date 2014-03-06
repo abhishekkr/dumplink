@@ -113,7 +113,7 @@ func main(){
     ReadTimeout: time.Duration(5) * time.Second,
   }
 
-  fmt.Printf("access your goshare at http://%s:%s\n", *httpuri, *httpport)
+  fmt.Printf("access your dumplink server at http://%s:%s\n", *httpuri, *httpport)
   err := srv.ListenAndServe()
   fmt.Println("Game Over:", err)
 }
