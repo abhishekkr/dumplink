@@ -64,10 +64,23 @@
   <h3>Just Drag-n-Drop the Button below on your Bookmark Toolbar.</h3>
   <a id="abk_bookmarklet_dumplink" class="button bookmarklet"
      onclick="window.alert('Drag this link to your bookmarks toolbar...');return false;"
-     href="javascript: ( function() { var url='http://{{.HTTPURI}}:{{.HTTPPort}}/dump?url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title); var oReq = new XMLHttpRequest(); oReq.open('GET', url, true); oReq.send();} )();" >
+     href="#" >
     DumpLink
   </a>
   <div>Dumped links are available <a href="/links">Here.</a></div>
 </div>
+<script>
+var dblQuote = '"';
+var cspContent = dblQuote + "default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;" + dblQuote;
+
+document.getElementById('abk_bookmarklet_dumplink').href = "javascript: ( function() { " +
+    "var meta = document.createElement('meta'); " +
+    "meta.httpEquiv = 'Content-Security-Policy'; " +
+    "meta.content = " + cspContent + ";" +
+    "document.getElementsByTagName('head')[0].appendChild(meta); " +
+    "var url = 'http://{{.HTTPURI}}:{{.HTTPPort}}/dump?url=' + encodeURIComponent(location.href) + '&title=' + encodeURIComponent(document.title); " +
+    "fetch(url).then(response => console.log(response)); " +
+  "} )();";
+</script>
 </body>
 </html>
